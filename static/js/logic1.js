@@ -3,7 +3,7 @@ let queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_we
 
 // Perform a GET request to the query URL/
 d3.json(queryUrl).then(function (data) {
-    // 
+    // Create function that contains the features in the data
     createFeatures(data.features);
 });
 
@@ -63,14 +63,14 @@ d3.json(queryUrl).then(function (data) {
         legend.onAdd = function () {
         
                 let div = L.DomUtil.create("div", "legend");
-                  
-                div.innerHTML += '<i style="background-color:#707B7C"></i><span>-10-10</span><br>';
+               
+                div.innerHTML += '<i style="background-color:#707B7C"></i><span>0-10</span><br>';
                 div.innerHTML += '<i style="background-color:#F1C40F""></i><span>10-30</span><br>';
                 div.innerHTML += '<i style="background-color:#F39C12""></i><span>30-50</span><br>';
                 div.innerHTML += '<i style="background-color:#A93226""></i><span>50-70</span><br>';
                 div.innerHTML += '<i style="background-color:#8E44AD"></i><span>70-90</span><br>';
                 div.innerHTML += '<i style="background-color:#1A5276"></i><span>90+</span>';
-        
+      
             return div;
         };
        
