@@ -1,12 +1,13 @@
+// Define the query URL
 let queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Perform a GET request to the query URL/
 d3.json(queryUrl).then(function (data) {
-    // Once we get a response, send the data.features object to the createFeatures function.
+    // 
     createFeatures(data.features);
 });
 
-    // 
+    // Create map with all its elements based on data retrieved in request
     function createFeatures(earthquakeData) {
 
         // Define function to display a popup for each feature that shows the place, magnitude, and depth
@@ -18,25 +19,26 @@ d3.json(queryUrl).then(function (data) {
         let earthquakes = L.geoJSON(earthquakeData, {
             // Set circle marker colour to be dependent on earthquake depth
             style: function(feature) {let depth = feature.geometry.coordinates[2];
-                                                            if (depth >= 90) {return {fillColor: "#1A5276"}}
-                                                            else if (depth >= 90) {return {fillColor: "D4AC0D"}}
-                                                            else if (depth >= 70) {return {fillColor: "#8E44AD"}}
-                                                            else if (depth >=50) {return {fillColor: "#A93226"}}
-                                                            else if (depth >=30) {return {fillColor: "#F39C12"}}
-                                                            else if (depth >=10) {return {fillColor: "#F1C40F"}}
-                                                            else {return {fillColor: "#707B7C"}}},
+                                        if (depth >= 90) {return {fillColor: "#1A5276"}}
+                                        else if (depth >= 90) {return {fillColor: "D4AC0D"}}
+                                        else if (depth >= 70) {return {fillColor: "#8E44AD"}}
+                                        else if (depth >=50) {return {fillColor: "#A93226"}}
+                                        else if (depth >=30) {return {fillColor: "#F39C12"}}
+                                        else if (depth >=10) {return {fillColor: "#F1C40F"}}
+                                        else {return {fillColor: "#707B7C"}}},
             // At each feature, attach the popup
             onEachFeature: onEachFeature,
             // Set marker size to be dependent on earthquake magnitude
             pointToLayer: function (feature, latlng) {
-                function getOptions(properties) {return {radius: parseInt(feature.properties.mag)*3, opacity: 0.9, fillOpacity: 1, weight:1, color: "#17202A"}}
+                function getOptions(properties) {return {radius: parseInt(feature.properties.mag)*3, 
+                                                        opacity: 0.9, 
+                                                        fillOpacity: 1, 
+                                                        weight:1, 
+                                                        color: "#17202A"}}
                 // Place circle marker at coordinates in each feature
-                return L.circleMarker(latlng, getOptions(feature.properties))}                                                        
-        
-            
+                return L.circleMarker(latlng, getOptions(feature.properties))}                                                                 
         });
 
-    
         // Create base layer for map
         let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -57,7 +59,7 @@ d3.json(queryUrl).then(function (data) {
         // Create legend icon
         let legend = L.control({position: 'bottomright'});
     
-        // Create legend as new html element and populate with circle marker colours and earthquake depth catrgories
+        // Create legend as new html element and populate with circle marker colours and earthquake depth categories
         legend.onAdd = function () {
         
                 let div = L.DomUtil.create("div", "legend");
