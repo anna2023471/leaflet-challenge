@@ -10,6 +10,7 @@ index.html
 In static folder:
 
 css folder: style.css
+
 js folder: logic1.js
 
 Repo has been deployed to GitHub Pages at https://anna2023471.github.io/leaflet-challenge/
