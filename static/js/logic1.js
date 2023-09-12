@@ -1,7 +1,7 @@
 // Define the query URL
 let queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-// Perform a GET request to the query URL/
+// Perform a GET request to the query URL
 d3.json(queryUrl).then(function (data) {
     // Create function that contains the features in the data
     createFeatures(data.features);
@@ -20,7 +20,6 @@ d3.json(queryUrl).then(function (data) {
             // Set circle marker colour to be dependent on earthquake depth
             style: function(feature) {let depth = feature.geometry.coordinates[2];
                                         if (depth >= 90) {return {fillColor: "#1A5276"}}
-                                        else if (depth >= 90) {return {fillColor: "D4AC0D"}}
                                         else if (depth >= 70) {return {fillColor: "#8E44AD"}}
                                         else if (depth >=50) {return {fillColor: "#A93226"}}
                                         else if (depth >=30) {return {fillColor: "#F39C12"}}
